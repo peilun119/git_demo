@@ -1,0 +1,129 @@
+-----------master 主體------------------------
+1. git version - 版本號
+
+2. 全域資訊
+ex:
+git config --global user.name your-name
+git config --global user.email your-email
+
+git config --global user.name sghost
+git config --global user.email aa8954158@gmail.com
+
+3. 初始化倉庫
+git init
+會看到檔案名稱後面出現綠色的U,代表 Untrack,尚未被控管的狀態
+
+4. 倉庫狀態
+git status 看檔案狀態
+
+5. 加入控管(暫存區)
+git add 檔案名稱
+
+6. 四種狀態
+  -> U(untracked) 
+U -> A(added)
+A -> M(Modified) 需要再git add 才會變成 A
+A -> D(Deleted)
+
+7. 刪除後恢復
+git restore 檔案名稱
+
+8. 檢視暫存區(看object下的資料夾對應哪個檔案)
+git ls-files -s
+
+9. 檢閱 object 資料夾的變動內容
+git cat-file -t object底下資料夾名稱的前6碼,-t 代表型態
+出現 blob 是二進制的資料
+
+git cat-file -p object底下資料夾名稱的前6碼,-p 代表內容
+出現 資料的內容
+
+
+10. 加入倉庫區儲存
+git commit -m "儲存時的註解內容",-m 代表 manager
+git commit -am "儲存時的註解內容",-am 代表git add .及-m 一起執行
+
+
+11. 檢視倉庫log
+git log
+git log --oneline
+log 太多時,按enter會往下顯示,或按q 跳出log
+
+12. 暫存區檔案恢復到工作目錄 (A -> U)
+git restore --staged 檔案名稱
+
+13. 倉庫檔案恢復工作目錄 (' ' -> U)
+git rm --cached 檔案名稱
+
+14. 強制刪除檔案
+git rm -f 檔案名稱  , rm 代表remove,-f 代表強制
+
+-----------分支------------------------
+15. 新增分支
+git branch 分支名稱
+
+16. 檢視分支
+git branch
+
+17. 切換分支
+git checkout 分支名稱
+
+18. 捨棄分支的變更
+git checkout .
+
+19. 合併分支到主分支
+需先切換到主體master
+git checkout mast
+再輸入 git merge 分支名稱,就會合併
+輸入 git log
+查看是否出現為 (HEAD -> master, 分支名稱)
+代表合併成功
+
+20. 合併問題?!
+master主體跟分支同時都修改同一個檔案,
+在執行合併指令時,會產生衝突,需要做以下選擇
+接受目前變更|接受來源變更|接受兩者變更|比較變更
+git commit -am "完成衝突確認"
+
+21. 刪除分支
+git branch -D 分支名稱
+
+22. Linux 內建編輯器 VIM 用法:
+   1. 輸入 git commit進入
+   2. 按下 i 進入編輯模式
+   3. 書寫完畢後按下 ESC 回到下方命令列
+   4. 輸入 :wq 離開 ,wq 代表 write + quit
+
+23. 程式練習
+新增3個檔案跟 commit log
+
+24. 切換commit-log
+要回到新增這3個檔案之前的log
+git checkout object底下資料夾名稱的前6碼
+git check master << 切回
+
+25. 重置到某一個commit-log(這時間點之後的log都不要了)
+   1. git rest object底下資料夾名稱的前6碼
+      會發現這3個檔案後方變成 U
+      切回 git check master
+      發現這3個檔案的log 不見了
+   2. git rest --hard object底下資料夾名稱的前6碼
+      會真正回到這個log當下的狀態
+      如果回到建立這3個檔案前的log,
+      執行git log --oneline 會發現這3個commit就不見了
+
+26. 檢視所有歷程
+git reflog
+包含 reset的紀錄也會顯示
+
+27. 綁定雲端 github 倉庫
+git remote add origin https://github.com/peilun119/git_demo.git
+
+28. 檢視綁定的倉庫
+git remote -v
+
+29. 上傳到雲端
+git push
+會出現提示要你輸入
+git push --set-upstream origin master
+這是因為剛上傳時沒指定主體或分支,這代表從本地master上傳到雲端的master
