@@ -127,3 +127,45 @@ git push
 會出現提示要你輸入
 git push --set-upstream origin master
 這是因為剛上傳時沒指定主體或分支,這代表從本地master上傳到雲端的master
+
+30. 從github複製專案下來
+git clone https://github.com/peilun119/git_demo.git
+   1. 在想要恢復的資料夾(例:桌面空白的地方)
+   2. 按右鍵點選 Open Git Bash here
+   3. 在終端機貼上指令
+
+31. 新增+切換 分支,一次完成
+git branch -b 分支名稱
+等於 git branch 分支名稱(新增) + git checkout 分支名稱(切換)
+
+   1. 練習新增一個分支
+   2. 在分支 新增或修改檔案
+   3. 執行git add . 跟 git commit -m 'message' 做檔案控管
+   4. 執行上傳雲端 git push
+   5. 會出現警告 fatal: The current branch test has no upstream branch. 代表目前雲端上沒有 test 分支
+   6. 要上傳就執行 git push --set-upstream origin test
+   7. 輸入後 github就會多一個分支
+   8. 切換分支到 master => git checkout master
+   9. 合併 test 分支 => git merge test
+   10. 刪除本地分支 => git branch -D test
+   11. 執行下方 33.的指令,刪除雲端分支
+
+32. 從雲端同步到本地端
+git pull
+
+   1. 練習在github 切換到分支 test
+   2. 隨便一個檔名點進去
+   3. 在 Code 右上角有一支筆 Edit this file
+   4. 隨便修改程式碼
+   5. 再點右上角綠色框 Commit changes... 存檔
+   6. 修改註解,點 Commit changes 存檔
+   7. 
+
+33. 刪除雲端分支
+git push --delete origin 分支名稱
+
+34. 合併上一次的 commit log
+git commit --amend
+
+35. 強制推送
+git push -f
